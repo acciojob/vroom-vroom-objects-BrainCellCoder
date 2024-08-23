@@ -1,7 +1,23 @@
-// Complete the js code
-function Car(make, model) {}
+function Car(make, model) {
+    this.make = make;
+    this.model = model;
+}
+Car.prototype.getMakeModel = function() {
+    return `${this.make} ${this.model}`;
+};
+function SportsCar(make, model, topSpeed) {
+    Car.call(this, make, model); // Call the parent constructor with make and model
+    this.topSpeed = topSpeed; // Initialize the topSpeed property
+}
+SportsCar.prototype = Object.create(Car.prototype);
+SportsCar.prototype.constructor = SportsCar;
+SportsCar.prototype.getTopSpeed = function() {
+    return this.topSpeed;
+};
 
-function SportsCar(make, model, topSpeed) {}
+const car = new SportsCar("Ferrari", "Testarossa", 200);
+console.log(car.getMakeModel());
+console.log(car.getTopSpeed()); 
 
 // Do not change the code below
 window.Car = Car;
